@@ -3,3 +3,5 @@ delivery.pem
 .terraform
 *.tfstate
 *.tfstate.backup
+config.json
+run_chef
