@@ -5,3 +5,4 @@ delivery.pem
 *.tfstate.backup
 config.json
 run_chef
+.terraform.tfstate.lock.info

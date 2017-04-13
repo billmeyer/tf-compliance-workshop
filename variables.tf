@@ -3,7 +3,7 @@
 
 variable "total_workstations" {
   description = "Total number of student workstations to create"
-  default     = "2"
+  default     = "25"
 }
 
 variable "workstation_ami" {
