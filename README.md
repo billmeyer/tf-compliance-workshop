@@ -6,36 +6,64 @@
 
 ## Running the thing
 
-This is all configured for the us-west region of EC2.
+This is all configured for the `us-west-2` region of EC2.
 
-Assuming I want my automate hostname prefixed with `scale` and my AWS EC2 SSH keypair is named `mykeynamehere`:
+1. Set environment variables:
 
-```
-export TF_VAR_workshop_prefix="sirius"
-export TF_VAR_aws_sshkey="mykeynamehere"
-export TF_VAR_ssh_pemfile="/Users/<user>/.ssh/<pemfile.pem>
+    Assuming I want my automate hostname prefixed with `acme` and my AWS EC2 SSH keypair is named `mykeynamehere`:
 
-terraform plan     # make sure that the expected number of workstations are created, etc.
-terraform apply
-ruby ./parse-state.rb terraform.tfstate
-```
+    ```
+    export TF_VAR_workshop_prefix="acme"
+    export TF_VAR_aws_sshkey="mykeynamehere"
+    export TF_VAR_ssh_pemfile="/Users/<user>/.ssh/<pemfile.pem>
+    ```
+
+2. Confirm the plan:
+
+    Make sure that the expected number of workstations are created, etc.
+
+    ```
+    $ terraform plan
+    ```
+
+3. Apply the plan:
+
+    ```
+    $ terraform apply
+    ```
+
+4. Verify workstation IP addresses:
+
+    ```
+    $ ./parse-state.rb terraform.tfstate
+    | Workstation | IP Address |
+    | ----------- | ---------- |
+    | acme-workshop-automate | 34.223.206.74 |
+    | hearts - 02 | 35.160.188.138 |
+    | hearts - 03 | 52.39.49.122 |
+    | hearts - 04 | 52.37.47.234 |
+    ```
 
 ## Variables
 
- * prefix (env var: TF_VAR_prefix): the prefix to be used in hostnames
-    * example: if prefix is "chi", the automate server FQDN will be: `chi-compliance-workshop.chefdemo.net`
- * aws_sshkey (env var: TF_VAR_aws_sshkey): name of the EC2 ssh key to set up for access
- * ssh_pemfile (env var: TF_VAR_ssh_pemfile): the pem file to be assigned to the new AWS EC2 instance such that Terraform doesn't get hung up on validating the SSH Fingerprint (most desktops don't add additional SSH keys to their __ssh-agent__)
- * contact_tag (env var: TF_VAR_contact_tag -- default: 'community'): the value to set for the X-Contact tag
+User-configurable variables can be found in the `variables.tf` file.
+
+|Variable|Environment Variable|Description|
+|---|---|---|
+|`prefix`|`TF_VAR_prefix`|The prefix to be used in hostnames.  __example__: if prefix is `acme`, the automate server FQDN will be: __acme-workshop.chefdemo.net__|
+|`aws_sshkey`|`TF_VAR_aws_sshkey`|Name of the EC2 ssh key to set up for access|
+|`ssh_pemfile`|`TF_VAR_ssh_pemfile`|The pem file to be assigned to the new AWS EC2 instance such that Terraform doesn't get hung up on validating the SSH Fingerprint (most desktops don't add additional SSH keys to their __ssh-agent__)|
+|`contact_tag`|`TF_VAR_contact_tag`|default: `community` - the value to set for the __X-Contact__ tag|
+|`total_workstations`|`TF_VAR_workstations`|The total number of student workstations (plus one for the instructor) that should be started.  The TF scripts will spawn that number of workstations using the minimum number of decks and suits as possible.|
 
 ## Automate Server
 
- * An automate server will be set up as `PREFIX-compliance-workshop.chefdemo.net`
- * Username: chef / Password: chef
+ * An automate server will be set up as `PREFIX-workshop.chefdemo.net`
+ * Username: __chef__ / Password: __chef__
 
 ## Workstations
 
 The workstation setup assumes you're using playing cards to assign workstations to users.
 
-In `variables.tf`, change the __total_workstations__ variable to reflect the total number of student workstations (plus one for the instructor) that should be started by Terraform.  The TF scripts will spawn that number of workstations using the minimum number of decks and suits as possible.
+
 

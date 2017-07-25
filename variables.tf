@@ -3,14 +3,15 @@
 
 variable "total_workstations" {
   description = "Total number of student workstations to create"
-  default     = "2"
+  default     = "3"
 }
 
 variable "workstation_ami" {
   description = "AWS AMI to be used for the student workstation"
 #  default     = "ami-44851124" # v1.1
 #  default     = "ami-b98214d9" # v1.2
-  default     = "ami-9f8e18ff" # v1.3
+#  default     = "ami-9f8e18ff" # v1.3
+  default     = "ami-10594169" # v1.4
 }
 
 variable "workstation_security_group" {
@@ -48,7 +49,7 @@ variable "ssh_pemfile" {
 
 variable "workshop_prefix" {
   type = "string"
-  default = "optum"
+  default = "acme"
 }
 
 variable "contact_tag" {

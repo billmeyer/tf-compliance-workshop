@@ -1,3 +1,5 @@
+#!/opt/chefdk/embedded/bin/ruby
+
 require 'json'
 
 # "sirius-workshop-station-black-diamonds-02"
