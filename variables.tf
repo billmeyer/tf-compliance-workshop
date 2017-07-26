@@ -11,7 +11,8 @@ variable "workstation_ami" {
 #  default     = "ami-44851124" # v1.1
 #  default     = "ami-b98214d9" # v1.2
 #  default     = "ami-9f8e18ff" # v1.3
-  default     = "ami-10594169" # v1.4
+#  default     = "ami-10594169" # v1.4
+  default     = "ami-3d0e1444" # v1.5 - fixed SSH 'Protocol 2' already being enabled.
 }
 
 variable "workstation_security_group" {
