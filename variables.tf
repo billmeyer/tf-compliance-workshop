@@ -3,7 +3,7 @@
 
 variable "total_workstations" {
   description = "Total number of student workstations to create"
-  default     = "3"
+  default     = "20"
 }
 
 variable "workstation_ami" {
@@ -50,7 +50,7 @@ variable "ssh_pemfile" {
 
 variable "workshop_prefix" {
   type = "string"
-  default = "acme"
+  default = "53"
 }
 
 variable "contact_tag" {
